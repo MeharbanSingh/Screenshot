@@ -2,8 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="Screenshot.MainWindow"
-        Title="Screenify" Height="600" Width="960"
+        Title="DeskSelfie" Height="600" Width="960"
         Style="{StaticResource MaterialDesignWindow}"
+        Icon="/DeskSelfie.png"
         Background="#FF2F2F2F" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!-- Circular toolbar button style -->
@@ -92,7 +93,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="BtnScreenshotRegion" Grid.Column="0" Click="ScreenshotRegion_Click" Style="{StaticResource ToolbarCircleButtonStyle}" Content="Screenshot region"/>
+                <Button x:Name="BtnScreenshotRegion" Grid.Column="0" Click="ScreenshotRegion_Click" Style="{DynamicResource ToolbarCircleButtonStyle}" Content="Screenshot region" />
                 <Button x:Name="BtnRecordVideo" Grid.Column="1" Click="RecordVideo_Click" Style="{StaticResource ToolbarCircleButtonStyle}" Content="Record video"/>
                 <Button x:Name="BtnEdit" Grid.Column="2" Click="EditItem_Click" Style="{StaticResource ToolbarCircleButtonStyle}" Content="Edit..."/>
                 <Button x:Name="BtnPublish" Grid.Column="3" Click="Publish_Click" Style="{StaticResource ToolbarCircleButtonStyle}" Content="Publish"/>

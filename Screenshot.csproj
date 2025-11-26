@@ -7,10 +7,24 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>DeskSelfieIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DeskSelfie.png" />
+    <None Remove="DeskSelfieIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DeskSelfieIcon.ico" />
+  </ItemGroup>  
+
+  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+  </ItemGroup>  
+
+  <ItemGroup>
+    <Resource Include="DeskSelfie.png" />
   </ItemGroup>
 
 </Project>
