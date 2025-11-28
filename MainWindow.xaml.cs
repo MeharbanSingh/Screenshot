@@ -288,6 +288,7 @@ namespace Screenshot
             }
         }
 
+        // Find the StartRecording method (around line 167) and update it:
         private void StartRecording()
         {
             if (_selectedScreenRect.IsEmpty)
@@ -300,7 +301,11 @@ namespace Screenshot
 
             _isRecording = true;
             _videoRecorder = new VideoRecorder();
-            _videoRecorder.Start(_selectedScreenRect);
+
+            // Pass the same directory used for screenshots
+            string targetDir = ResolveEffectiveCaptureDirectory();
+            Directory.CreateDirectory(targetDir);
+            _videoRecorder.Start(_selectedScreenRect, targetDir);
 
             // Update button text
             BtnRecordVideo.Content = "⏹ Stop Recording";

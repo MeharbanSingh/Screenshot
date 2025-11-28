@@ -15,16 +15,18 @@ namespace Screenshot
         private Rect _region;
         private string _sessionDir = string.Empty;
         private bool _recording;
+        private string _outputDirectory = string.Empty;
 
-        public void Start(Rect region)
+        public void Start(Rect region, string outputDirectory)
         {
             _region = region;
+            _outputDirectory = outputDirectory;
             _sessionDir = Path.Combine(Path.GetTempPath(), "capture_session_" + DateTime.Now.ToString("yyyyMMdd_HHmmss"));
             Directory.CreateDirectory(_sessionDir);
             _frames.Clear();
             _recording = true;
 
-            Debug.WriteLine($"VideoRecorder started. Region: {region}, Session dir: {_sessionDir}");
+            Debug.WriteLine($"VideoRecorder started. Region: {region}, Session dir: {_sessionDir}, Output dir: {_outputDirectory}");
 
             // Check FFmpeg availability at startup
             var ffmpeg = FindFfmpeg();
@@ -93,7 +95,9 @@ namespace Screenshot
                     return _sessionDir; // Frames only
                 }
 
-                var outputDir = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+                var outputDir = string.IsNullOrWhiteSpace(_outputDirectory)
+                    ? Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
+                    : _outputDirectory;
                 Directory.CreateDirectory(outputDir);
                 var output = Path.Combine(outputDir, $"capture_{DateTime.Now:yyyyMMdd_HHmmss}.mp4");
 
@@ -221,7 +225,7 @@ namespace Screenshot
             Debug.WriteLine($"Checking: {currentDirFfmpeg}");
             if (File.Exists(currentDirFfmpeg))
             {
-                Debug.WriteLine($"? Found FFmpeg in current directory: {currentDirFfmpeg}");
+                Debug.WriteLine($"Found FFmpeg in current directory: {currentDirFfmpeg}");
                 return currentDirFfmpeg;
             }
 
